@@ -1,0 +1,1 @@
+java -cp db-dict-0.0.1-SNAPSHOT.jar  -Xmx1024m -Xms512m cn.tml.dbtool.dbdict.DbDicApp
