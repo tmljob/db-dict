@@ -40,12 +40,22 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class ExcelTemplateEngine extends AbstractTemplateEngine {
-
-    /**
-     * 
-     */
+   
     private static final long serialVersionUID = 9013626158732805456L;
-
+    
+    private static final String CONTENT_TITLE_DB = "数据库";
+    private static final String CONTENT_TITLE_TBCNNAME = "表中文名";
+    private static final String CONTENT_TITLE_TBENNAME = "表英文名";
+    private static final String CONTENT_TITLE_DISCRP = "说明";
+    
+    private static final String STRUCT_TITLE_FDCNNAME = "字段中文名";
+    private static final String STRUCT_TITLE_FDENNAME = "字段英文名";
+    private static final String STRUCT_TITLE_FDTYPE = "字段类型";
+    private static final String STRUCT_TITLE_FDREMARKS = "注释";
+    private static final String STRUCT_TITLE_FDPRIMAY = "是否主键";
+    private static final String STRUCT_TITLE_FDNULL = "允许空值";
+    private static final String STRUCT_FDDEFAULT = "默认值";
+   
     private static final String SHEET_CONTENT = "目录";
     private static final String SHEET_TABLE_STRUCT = "表结构";
     private static final String FILE_SUFFIX = ".xlsx";
@@ -82,19 +92,19 @@ public class ExcelTemplateEngine extends AbstractTemplateEngine {
         Row headRow = contentSheet.createRow(0);
 
         Cell topicCell = headRow.createCell(ExcelConstant.CONTENT_DB_INDEX);
-        topicCell.setCellValue("数据库");
+        topicCell.setCellValue(CONTENT_TITLE_DB);
         setCellStyleWithFillColor(wb, topicCell);
         Cell tbCnNameCell = headRow
                 .createCell(ExcelConstant.CONTENT_TBCNNAME_INDEX);
-        tbCnNameCell.setCellValue("表中文名");
+        tbCnNameCell.setCellValue(CONTENT_TITLE_TBCNNAME);
         setCellStyleWithFillColor(wb, tbCnNameCell);
         Cell tbEnNameCell = headRow
                 .createCell(ExcelConstant.CONTENT_TBENNAME_INDEX);
-        tbEnNameCell.setCellValue("表英文名");
+        tbEnNameCell.setCellValue(CONTENT_TITLE_TBENNAME);
         setCellStyleWithFillColor(wb, tbEnNameCell);
         Cell discrpCell = headRow
                 .createCell(ExcelConstant.CONTENT_DISCRP_INDEX);
-        discrpCell.setCellValue("说明");
+        discrpCell.setCellValue(CONTENT_TITLE_DISCRP);
         setCellStyleWithFillColor(wb, discrpCell);
 
         int contentRowNum = 1;
@@ -151,31 +161,31 @@ public class ExcelTemplateEngine extends AbstractTemplateEngine {
             structRow = structSheet.createRow(structRowNum++);
             Cell fieldCnNameCell = structRow
                     .createCell(ExcelConstant.STRUCT_FIELDCNNAME);
-            fieldCnNameCell.setCellValue("字段中文名");
+            fieldCnNameCell.setCellValue(STRUCT_TITLE_FDCNNAME);
             setCellStyle(wb, fieldCnNameCell);
             Cell fieldEnNameCell = structRow
-                    .createCell(ExcelConstant.STRUCT_FIELDCNNAME);
-            fieldEnNameCell.setCellValue("字段英文名");
+                    .createCell(ExcelConstant.STRUCT_FIELDENNAME);
+            fieldEnNameCell.setCellValue(STRUCT_TITLE_FDENNAME);
             setCellStyle(wb, fieldEnNameCell);
             Cell fieldTypeCell = structRow
                     .createCell(ExcelConstant.STRUCT_FIELDTYPE);
-            fieldTypeCell.setCellValue("字段类型");
+            fieldTypeCell.setCellValue(STRUCT_TITLE_FDTYPE);
             setCellStyle(wb, fieldTypeCell);
             Cell fieldRemarksCell = structRow
                     .createCell(ExcelConstant.STRUCT_FIELDREMARKS);
-            fieldRemarksCell.setCellValue("注释");
+            fieldRemarksCell.setCellValue(STRUCT_TITLE_FDREMARKS);
             setCellStyle(wb, fieldRemarksCell);
             Cell fieldPrimayKeyCell = structRow
                     .createCell(ExcelConstant.STRUCT_FIELDPRIMAYKEY);
-            fieldPrimayKeyCell.setCellValue("是否主键");
+            fieldPrimayKeyCell.setCellValue(STRUCT_TITLE_FDPRIMAY);
             setCellStyle(wb, fieldPrimayKeyCell);
             Cell fieldNullCell = structRow
                     .createCell(ExcelConstant.STRUCT_FIELDNULL);
-            fieldNullCell.setCellValue("允许空值");
+            fieldNullCell.setCellValue(STRUCT_TITLE_FDNULL);
             setCellStyle(wb, fieldNullCell);
             Cell fieldDefaultCell = structRow
                     .createCell(ExcelConstant.STRUCT_FIELDDEFAULT);
-            fieldDefaultCell.setCellValue("默认值");
+            fieldDefaultCell.setCellValue(STRUCT_FDDEFAULT);
             setCellStyle(wb, fieldDefaultCell);
 
             // 链接跳转
