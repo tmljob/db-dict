@@ -35,6 +35,7 @@ import cn.smallbun.screw.core.metadata.model.DataModel;
 import cn.smallbun.screw.core.metadata.model.TableModel;
 import cn.smallbun.screw.core.util.ExceptionUtils;
 import cn.smallbun.screw.core.util.StringUtils;
+import cn.tml.dbtool.dbdict.constant.ExcelConstant;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -61,31 +62,38 @@ public class ExcelTemplateEngine extends AbstractTemplateEngine {
         Sheet structSheet = wb.createSheet(SHEET_TABLE_STRUCT);
 
         // 设置目录页面列宽度
-        contentSheet.setColumnWidth(0, 20 * 256);
-        contentSheet.setColumnWidth(1, 20 * 256);
-        contentSheet.setColumnWidth(2, 30 * 256);
-        contentSheet.setColumnWidth(3, 60 * 256);
+        contentSheet.setColumnWidth(ExcelConstant.CONTENT_DB_INDEX, 20 * 256);
+        contentSheet.setColumnWidth(ExcelConstant.CONTENT_TBCNNAME_INDEX,
+                20 * 256);
+        contentSheet.setColumnWidth(ExcelConstant.CONTENT_TBENNAME_INDEX,
+                30 * 256);
+        contentSheet.setColumnWidth(ExcelConstant.CONTENT_DISCRP_INDEX,
+                60 * 256);
         // 设置表结构页列宽度
-        structSheet.setColumnWidth(0, 20 * 256);
-        structSheet.setColumnWidth(1, 20 * 256);
-        structSheet.setColumnWidth(2, 20 * 256);
-        structSheet.setColumnWidth(3, 40 * 256);
-        structSheet.setColumnWidth(4, 10 * 256);
-        structSheet.setColumnWidth(5, 10 * 256);
-        structSheet.setColumnWidth(6, 10 * 256);
+        structSheet.setColumnWidth(ExcelConstant.STRUCT_FIELDCNNAME, 20 * 256);
+        structSheet.setColumnWidth(ExcelConstant.STRUCT_FIELDENNAME, 20 * 256);
+        structSheet.setColumnWidth(ExcelConstant.STRUCT_FIELDTYPE, 20 * 256);
+        structSheet.setColumnWidth(ExcelConstant.STRUCT_FIELDREMARKS, 40 * 256);
+        structSheet.setColumnWidth(ExcelConstant.STRUCT_FIELDPRIMAYKEY,
+                10 * 256);
+        structSheet.setColumnWidth(ExcelConstant.STRUCT_FIELDNULL, 10 * 256);
+        structSheet.setColumnWidth(ExcelConstant.STRUCT_FIELDDEFAULT, 10 * 256);
 
         Row headRow = contentSheet.createRow(0);
 
-        Cell topicCell = headRow.createCell(0);
+        Cell topicCell = headRow.createCell(ExcelConstant.CONTENT_DB_INDEX);
         topicCell.setCellValue("数据库");
         setCellStyleWithFillColor(wb, topicCell);
-        Cell tbCnNameCell = headRow.createCell(1);
+        Cell tbCnNameCell = headRow
+                .createCell(ExcelConstant.CONTENT_TBCNNAME_INDEX);
         tbCnNameCell.setCellValue("表中文名");
         setCellStyleWithFillColor(wb, tbCnNameCell);
-        Cell tbEnNameCell = headRow.createCell(2);
+        Cell tbEnNameCell = headRow
+                .createCell(ExcelConstant.CONTENT_TBENNAME_INDEX);
         tbEnNameCell.setCellValue("表英文名");
         setCellStyleWithFillColor(wb, tbEnNameCell);
-        Cell discrpCell = headRow.createCell(3);
+        Cell discrpCell = headRow
+                .createCell(ExcelConstant.CONTENT_DISCRP_INDEX);
         discrpCell.setCellValue("说明");
         setCellStyleWithFillColor(wb, discrpCell);
 
@@ -95,29 +103,36 @@ public class ExcelTemplateEngine extends AbstractTemplateEngine {
         Row structRow;
         for (TableModel table : info.getTables()) {
             contentRow = contentSheet.createRow(contentRowNum++);
-            Cell dataBaseCell = contentRow.createCell(0);
+            Cell dataBaseCell = contentRow
+                    .createCell(ExcelConstant.CONTENT_DB_INDEX);
             dataBaseCell.setCellValue(info.getDatabase());
             setCellStyleAlignCenter(wb, dataBaseCell);
-            tbCnNameCell = contentRow.createCell(1);
+            tbCnNameCell = contentRow
+                    .createCell(ExcelConstant.CONTENT_TBCNNAME_INDEX);
             tbCnNameCell.setCellValue(table.getTableName());
             setHyperLinkCellStyle(wb, tbCnNameCell);
 
-            tbEnNameCell = contentRow.createCell(2);
+            tbEnNameCell = contentRow
+                    .createCell(ExcelConstant.CONTENT_TBENNAME_INDEX);
             tbEnNameCell.setCellValue(table.getTableName());
             setCellStyle(wb, tbEnNameCell);
 
-            discrpCell = contentRow.createCell(3);
+            discrpCell = contentRow
+                    .createCell(ExcelConstant.CONTENT_DISCRP_INDEX);
             discrpCell.setCellValue(table.getRemarks());
             setCellStyle(wb, discrpCell);
 
             structRow = structSheet.createRow(structRowNum++);
-            Cell tbCnNameCellExt = structRow.createCell(0);
+            Cell tbCnNameCellExt = structRow
+                    .createCell(ExcelConstant.STRUCT_TBCNNAME_INDEX);
             tbCnNameCellExt.setCellValue(table.getTableName());
             setCellStyleWithFillColor(wb, tbCnNameCellExt);
-            Cell tbEnNameCellExt = structRow.createCell(1);
+            Cell tbEnNameCellExt = structRow
+                    .createCell(ExcelConstant.STRUCT_TBENNAME_INDEX);
             tbEnNameCellExt.setCellValue(table.getTableName());
             setCellStyleWithFillColor(wb, tbEnNameCellExt);
-            Cell discrpCellExt = structRow.createCell(2);
+            Cell discrpCellExt = structRow
+                    .createCell(ExcelConstant.STRUCT_DISCRP_INDEX);
             discrpCellExt.setCellValue(table.getRemarks());
             setCellStyleWithFillColor(wb, discrpCellExt);
 
@@ -134,25 +149,32 @@ public class ExcelTemplateEngine extends AbstractTemplateEngine {
             RegionUtil.setBorderTop(BorderStyle.THIN, structCra, structSheet); // 上边框
 
             structRow = structSheet.createRow(structRowNum++);
-            Cell fieldCnNameCell = structRow.createCell(0);
+            Cell fieldCnNameCell = structRow
+                    .createCell(ExcelConstant.STRUCT_FIELDCNNAME);
             fieldCnNameCell.setCellValue("字段中文名");
             setCellStyle(wb, fieldCnNameCell);
-            Cell fieldEnNameCell = structRow.createCell(1);
+            Cell fieldEnNameCell = structRow
+                    .createCell(ExcelConstant.STRUCT_FIELDCNNAME);
             fieldEnNameCell.setCellValue("字段英文名");
             setCellStyle(wb, fieldEnNameCell);
-            Cell fieldTypeCell = structRow.createCell(2);
+            Cell fieldTypeCell = structRow
+                    .createCell(ExcelConstant.STRUCT_FIELDTYPE);
             fieldTypeCell.setCellValue("字段类型");
             setCellStyle(wb, fieldTypeCell);
-            Cell fieldRemarksCell = structRow.createCell(3);
+            Cell fieldRemarksCell = structRow
+                    .createCell(ExcelConstant.STRUCT_FIELDREMARKS);
             fieldRemarksCell.setCellValue("注释");
             setCellStyle(wb, fieldRemarksCell);
-            Cell fieldPrimayKeyCell = structRow.createCell(4);
+            Cell fieldPrimayKeyCell = structRow
+                    .createCell(ExcelConstant.STRUCT_FIELDPRIMAYKEY);
             fieldPrimayKeyCell.setCellValue("是否主键");
             setCellStyle(wb, fieldPrimayKeyCell);
-            Cell fieldNullCell = structRow.createCell(5);
+            Cell fieldNullCell = structRow
+                    .createCell(ExcelConstant.STRUCT_FIELDNULL);
             fieldNullCell.setCellValue("允许空值");
             setCellStyle(wb, fieldNullCell);
-            Cell fieldDefaultCell = structRow.createCell(6);
+            Cell fieldDefaultCell = structRow
+                    .createCell(ExcelConstant.STRUCT_FIELDDEFAULT);
             fieldDefaultCell.setCellValue("默认值");
             setCellStyle(wb, fieldDefaultCell);
 
@@ -166,26 +188,33 @@ public class ExcelTemplateEngine extends AbstractTemplateEngine {
 
             for (ColumnModel column : table.getColumns()) {
                 structRow = structSheet.createRow(structRowNum++);
-                fieldCnNameCell = structRow.createCell(0);
+                fieldCnNameCell = structRow
+                        .createCell(ExcelConstant.STRUCT_FIELDCNNAME);
                 fieldCnNameCell.setCellValue(column.getColumnName());
                 setCellStyle(wb, fieldCnNameCell);
-                fieldEnNameCell = structRow.createCell(1);
+                fieldEnNameCell = structRow
+                        .createCell(ExcelConstant.STRUCT_FIELDENNAME);
                 fieldEnNameCell.setCellValue(column.getColumnName());
                 setCellStyle(wb, fieldEnNameCell);
-                fieldTypeCell = structRow.createCell(2);
+                fieldTypeCell = structRow
+                        .createCell(ExcelConstant.STRUCT_FIELDTYPE);
                 fieldTypeCell.setCellValue(column.getTypeName() + "("
                         + column.getColumnSize() + ")");
                 setCellStyle(wb, fieldTypeCell);
-                fieldRemarksCell = structRow.createCell(3);
+                fieldRemarksCell = structRow
+                        .createCell(ExcelConstant.STRUCT_FIELDREMARKS);
                 fieldRemarksCell.setCellValue(column.getRemarks());
                 setCellStyle(wb, fieldRemarksCell);
-                fieldPrimayKeyCell = structRow.createCell(4);
+                fieldPrimayKeyCell = structRow
+                        .createCell(ExcelConstant.STRUCT_FIELDPRIMAYKEY);
                 fieldPrimayKeyCell.setCellValue(column.getPrimaryKey());
                 setCellStyle(wb, fieldPrimayKeyCell);
-                fieldNullCell = structRow.createCell(5);
+                fieldNullCell = structRow
+                        .createCell(ExcelConstant.STRUCT_FIELDNULL);
                 fieldNullCell.setCellValue(column.getNullable());
                 setCellStyle(wb, fieldNullCell);
-                fieldDefaultCell = structRow.createCell(6);
+                fieldDefaultCell = structRow
+                        .createCell(ExcelConstant.STRUCT_FIELDDEFAULT);
                 fieldDefaultCell.setCellValue(column.getColumnDef());
                 setCellStyle(wb, fieldDefaultCell);
             }
@@ -212,7 +241,7 @@ public class ExcelTemplateEngine extends AbstractTemplateEngine {
         } catch (IOException e) {
             log.error("ExcelTemplateEngine output error!", e);
         }
-        
+
         // open the output directory
         openOutputDir();
 
@@ -227,16 +256,17 @@ public class ExcelTemplateEngine extends AbstractTemplateEngine {
 
         cell.setCellStyle(cellStyle);
     }
-    
+
     private void setCellStyleWithFillColor(Workbook wb, Cell cell) {
         CellStyle cellStyle = wb.createCellStyle();
         cellStyle.setBorderBottom(BorderStyle.THIN);
         cellStyle.setBorderLeft(BorderStyle.THIN);
         cellStyle.setBorderRight(BorderStyle.THIN);
         cellStyle.setBorderTop(BorderStyle.THIN);
-        
+
         cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-        cellStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+        cellStyle.setFillForegroundColor(
+                IndexedColors.GREY_25_PERCENT.getIndex());
 
         cell.setCellStyle(cellStyle);
     }
@@ -290,21 +320,22 @@ public class ExcelTemplateEngine extends AbstractTemplateEngine {
         getEngineConfig().setFileOutputDir(file.getParent());
         return file;
     }
-    
+
     @Override
     protected void openOutputDir() {
-        //是否打开，如果是就打开输出路径
-        if (getEngineConfig().isOpenOutputDir()
-            && StringUtils.isNotBlank(getEngineConfig().getFileOutputDir())) {
+        // 是否打开，如果是就打开输出路径
+        if (getEngineConfig().isOpenOutputDir() && StringUtils
+                .isNotBlank(getEngineConfig().getFileOutputDir())) {
             try {
-                //获取系统信息
+                // 获取系统信息
                 String osName = System.getProperty("os.name");
                 if (osName != null) {
                     if (osName.contains(MAC)) {
-                        Runtime.getRuntime().exec("open " + getEngineConfig().getFileOutputDir());
+                        Runtime.getRuntime().exec(
+                                "open " + getEngineConfig().getFileOutputDir());
                     } else if (osName.contains(WINDOWS)) {
-                        Runtime.getRuntime()
-                            .exec("explorer " +getEngineConfig().getFileOutputDir());
+                        Runtime.getRuntime().exec("explorer "
+                                + getEngineConfig().getFileOutputDir());
                     }
                 }
             } catch (IOException e) {
