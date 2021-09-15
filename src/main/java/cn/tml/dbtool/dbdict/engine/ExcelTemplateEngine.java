@@ -40,14 +40,14 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class ExcelTemplateEngine extends AbstractTemplateEngine {
-   
+
     private static final long serialVersionUID = 9013626158732805456L;
-    
+
     private static final String CONTENT_TITLE_DB = "数据库";
     private static final String CONTENT_TITLE_TBCNNAME = "表中文名";
     private static final String CONTENT_TITLE_TBENNAME = "表英文名";
     private static final String CONTENT_TITLE_DISCRP = "说明";
-    
+
     private static final String STRUCT_TITLE_FDCNNAME = "字段中文名";
     private static final String STRUCT_TITLE_FDENNAME = "字段英文名";
     private static final String STRUCT_TITLE_FDTYPE = "字段类型";
@@ -55,7 +55,7 @@ public class ExcelTemplateEngine extends AbstractTemplateEngine {
     private static final String STRUCT_TITLE_FDPRIMAY = "是否主键";
     private static final String STRUCT_TITLE_FDNULL = "允许空值";
     private static final String STRUCT_FDDEFAULT = "默认值";
-   
+
     private static final String SHEET_CONTENT = "目录";
     private static final String SHEET_TABLE_STRUCT = "表结构";
     private static final String FILE_SUFFIX = ".xlsx";
@@ -217,11 +217,17 @@ public class ExcelTemplateEngine extends AbstractTemplateEngine {
                 setCellStyle(wb, fieldRemarksCell);
                 fieldPrimayKeyCell = structRow
                         .createCell(ExcelConstant.STRUCT_FIELDPRIMAYKEY);
-                fieldPrimayKeyCell.setCellValue(column.getPrimaryKey());
+                fieldPrimayKeyCell.setCellValue(ExcelConstant.CELL_VALUE_YES
+                        .equalsIgnoreCase(column.getPrimaryKey())
+                                ? ExcelConstant.CELL_VALUE_YES
+                                : "");
                 setCellStyle(wb, fieldPrimayKeyCell);
                 fieldNullCell = structRow
                         .createCell(ExcelConstant.STRUCT_FIELDNULL);
-                fieldNullCell.setCellValue(column.getNullable());
+                fieldNullCell.setCellValue(ExcelConstant.CELL_VALUE_NO
+                        .equalsIgnoreCase(column.getNullable())
+                                ? ExcelConstant.CELL_VALUE_NO
+                                : "");
                 setCellStyle(wb, fieldNullCell);
                 fieldDefaultCell = structRow
                         .createCell(ExcelConstant.STRUCT_FIELDDEFAULT);

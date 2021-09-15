@@ -18,5 +18,8 @@ public class ExcelConstant {
     public static final int STRUCT_FIELDPRIMAYKEY = 4;
     public static final int STRUCT_FIELDNULL = 5;
     public static final int STRUCT_FIELDDEFAULT = 6;
+    
+    public static final String CELL_VALUE_YES = "Y";
+    public static final String CELL_VALUE_NO = "N";
 
 }
