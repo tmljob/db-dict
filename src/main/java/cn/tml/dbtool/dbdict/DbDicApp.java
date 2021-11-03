@@ -26,7 +26,7 @@ public class DbDicApp {
         String drCls = PropertiesUtil.getString(AppConstant.CFG_DB_DRCLS);
         String dbUrl = PropertiesUtil.getString(AppConstant.CFG_DB_URL);
         String user = PropertiesUtil.getString(AppConstant.CFG_DB_NAME);
-        String pwd = PropertiesUtil.getString(AppConstant.CFG_DB_PWD);
+        String pwd = PropertiesUtil.getString(AppConstant.CFG_DB_ACESS);
         DatasourceConfig datasourceConfig = new DatasourceConfig();
         datasourceConfig.setDbUrl(dbUrl);
         datasourceConfig.setDrCls(drCls);

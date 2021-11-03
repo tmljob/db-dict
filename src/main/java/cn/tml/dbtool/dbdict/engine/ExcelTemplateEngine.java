@@ -328,7 +328,7 @@ public class ExcelTemplateEngine extends AbstractTemplateEngine {
         // 不存在创建
         if (!file.exists()) {
             // 创建文件夹
-            boolean mkdir = file.mkdirs();
+           file.mkdirs();
         }
         // 文件后缀
         file = new File(file, docName + FILE_SUFFIX);

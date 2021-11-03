@@ -2,6 +2,9 @@ package cn.tml.dbtool.dbdict.constant;
 
 public class ExcelConstant {
     
+    private ExcelConstant() {
+    }
+    
     public static final int CONTENT_DB_INDEX = 0;
     public static final int CONTENT_TBCNNAME_INDEX = 1;
     public static final int CONTENT_TBENNAME_INDEX = 2;
