@@ -11,7 +11,7 @@
 spring.datasource.url=jdbc:mysql://10.19.248.222:3306/enc_vehicle
 spring.datasource.driverClassName=com.mysql.cj.jdbc.Driver
 spring.datasource.username=root
-spring.datasource.password=Bocom_123
+spring.datasource.password=XXXXXX
 ```
 
 生成的数据库字段文档，支持HTML/WORD/EXCEL/MD格式，配置如下。
